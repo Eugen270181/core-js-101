@@ -165,8 +165,9 @@ function unbracketTag(str) {
  *   'Thunderstruck' => 'THUNDERSTRUCK'
  *  'abcdefghijklmnopqrstuvwxyz' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
  */
-function convertToUpperCase(/* str */) {
-  throw new Error('Not implemented');
+function convertToUpperCase(str) {
+//  throw new Error('Not implemented');
+  return str.toUpperCase();
 }
 
 /**
@@ -184,8 +185,9 @@ function convertToUpperCase(/* str */) {
  *   ],
  *   'info@gmail.com' => ['info@gmail.com']
  */
-function extractEmails(/* str */) {
-  throw new Error('Not implemented');
+function extractEmails(str) {
+//  throw new Error('Not implemented');
+  return str.split(';');
 }
 
 /**
@@ -211,8 +213,16 @@ function extractEmails(/* str */) {
  *             '└──────────┘\n'
  *
  */
-function getRectangleString(/* width, height */) {
-  throw new Error('Not implemented');
+function getRectangleString(width, height) {
+  // throw new Error('Not implemented');
+  const horizontalLine = '─'.repeat(width - 2);
+  const verticalLine = ' '.repeat(width - 2);
+
+  const topLine = `┌${horizontalLine}┐\n`;
+  const middleLine = `│${verticalLine}│\n`.repeat(height - 2);
+  const bottomLine = `└${horizontalLine}┘\n`;
+
+  return topLine + middleLine + bottomLine;
 }
 
 
@@ -232,8 +242,27 @@ function getRectangleString(/* width, height */) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  // throw new Error('Not implemented');
+  const input = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+  const output = 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm';
+  let encodedStr = '';
+
+  for (let i = 0; i < str.length; i += 1) {
+    const char = str[i];
+    const index = input.indexOf(char);
+
+    if (index === -1) {
+      // Character is not a letter, keep it as is
+      encodedStr += char;
+    } else {
+      // Rotate the letter by 13 positions
+      const encodedChar = output[index];
+      encodedStr += encodedChar;
+    }
+  }
+
+  return encodedStr;
 }
 
 /**
@@ -249,8 +278,9 @@ function encodeToRot13(/* str */) {
  *   isString('test') => true
  *   isString(new String('test')) => true
  */
-function isString(/* value */) {
-  throw new Error('Not implemented');
+function isString(value) {
+  // throw new Error('Not implemented');
+  return (typeof value === 'string' || value instanceof String);
 }
 
 
@@ -278,8 +308,14 @@ function isString(/* value */) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId(/* value */) {
-  throw new Error('Not implemented');
+function getCardId(value) {
+  // throw new Error('Not implemented');
+  const deck = ['A♣', '2♣', '3♣', '4♣', '5♣', '6♣', '7♣', '8♣', '9♣', '10♣', 'J♣', 'Q♣', 'K♣',
+    'A♦', '2♦', '3♦', '4♦', '5♦', '6♦', '7♦', '8♦', '9♦', '10♦', 'J♦', 'Q♦', 'K♦',
+    'A♥', '2♥', '3♥', '4♥', '5♥', '6♥', '7♥', '8♥', '9♥', '10♥', 'J♥', 'Q♥', 'K♥',
+    'A♠', '2♠', '3♠', '4♠', '5♠', '6♠', '7♠', '8♠', '9♠', '10♠', 'J♠', 'Q♠', 'K♠'];
+
+  return deck.indexOf(value);
 }
 
 
